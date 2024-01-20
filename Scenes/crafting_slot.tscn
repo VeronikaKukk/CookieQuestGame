@@ -1,0 +1,148 @@
+[gd_scene load_steps=12 format=3 uid="uid://byjwybv84vk4s"]
+
+[ext_resource type="Script" path="res://Scripts/crafting_slot.gd" id="1_4btco"]
+[ext_resource type="Texture2D" uid="uid://ce2ekfbk5b35i" path="res://Graphics/Spikes.png" id="1_yg8qr"]
+[ext_resource type="FontFile" uid="uid://dykw5hix47w8h" path="res://PeaberryBase.ttf" id="2_5rye3"]
+[ext_resource type="AudioStream" uid="uid://1pojqjoul7vf" path="res://Sounds/Arcane Beacon.wav" id="4_ns2as"]
+[ext_resource type="PackedScene" uid="uid://dvy57iq3if5f3" path="res://Scenes/upgrade_particles.tscn" id="5_j4ad4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfwil"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo7ld"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rx3fq"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwbsr"]
+bg_color = Color(0, 0.360784, 0.388235, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.360784, 0.388235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52eq"]
+bg_color = Color(0, 0.360784, 0.388235, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.360784, 0.388235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_xlj43"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.337255, 0.337255, 0.337255, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("2_5rye3")
+Button/styles/disabled = SubResource("StyleBoxFlat_jfwil")
+Button/styles/focus = SubResource("StyleBoxFlat_jo7ld")
+Button/styles/hover = SubResource("StyleBoxFlat_rx3fq")
+Button/styles/normal = SubResource("StyleBoxFlat_dwbsr")
+Button/styles/pressed = SubResource("StyleBoxFlat_x52eq")
+
+[node name="CraftingSlot" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_xlj43")
+theme_override_constants/separation = 10
+script = ExtResource("1_4btco")
+
+[node name="CraftButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_5rye3")
+text = "Craft"
+
+[node name="Item0" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_yg8qr")
+stretch_mode = 2
+
+[node name="Item1" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_yg8qr")
+stretch_mode = 2
+
+[node name="Item2" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_yg8qr")
+stretch_mode = 2
+
+[node name="UpgradeText" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5rye3")
+text = "Gain x thing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5rye3")
+text = "=>"
+
+[node name="UpgradePicture" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_yg8qr")
+stretch_mode = 2
+
+[node name="CraftedAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ns2as")
+
+[node name="UpgradeParticles" parent="." instance=ExtResource("5_j4ad4")]
+position = Vector2(353, 19)
+
+[connection signal="pressed" from="CraftButton" to="." method="_on_craft_button_pressed"]

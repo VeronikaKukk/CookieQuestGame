@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://t5dbcyc51lac"]
+
+[ext_resource type="Texture2D" uid="uid://dfoy6yqrgegaf" path="res://Graphics/background/cave-platformer-tileset-16x16.png" id="1_c7xo8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xucrl"]
+texture = ExtResource("1_c7xo8")
+6:0/0 = 0
+7:0/0 = 0
+7:1/0 = 0
+6:1/0 = 0
+7:2/0 = 0
+5:1/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_73xhi"]
+sources/1 = SubResource("TileSetAtlasSource_xucrl")
+
+[node name="cave_bg_tile_map" type="TileMap"]
+tile_set = SubResource("TileSet_73xhi")
+format = 2
+layer_0/z_index = -1

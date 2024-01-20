@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://eld5waaybc2h"]
+
+[ext_resource type="Script" path="res://Scripts/crafting_panel.gd" id="1_81ax1"]
+[ext_resource type="FontFile" uid="uid://dykw5hix47w8h" path="res://PeaberryBase.ttf" id="2_54kve"]
+[ext_resource type="Texture2D" uid="uid://ctwa0xrsiwpus" path="res://Graphics/background/divider-005.png" id="2_nr2fp"]
+[ext_resource type="AudioStream" uid="uid://bepeiwwoa3scy" path="res://Sounds/BUTTON_05.wav" id="4_kadpu"]
+[ext_resource type="AudioStream" uid="uid://3ubk6eiprtnm" path="res://Sounds/071_Unequip_01.wav" id="5_hkcmd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oplam"]
+bg_color = Color(0.662745, 0.713726, 0.764706, 0.52549)
+
+[node name="CraftingPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81ax1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -175.0
+offset_right = 225.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "X"
+
+[node name="InfoPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oplam")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DividerLeft" type="TextureRect" parent="InfoPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_nr2fp")
+stretch_mode = 2
+flip_h = true
+
+[node name="Label" type="Label" parent="InfoPanel/HBoxContainer"]
+layout_mode = 2
+text = "  "
+
+[node name="infotext" type="Label" parent="InfoPanel/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_54kve")
+text = "You gained xx"
+
+[node name="TextureRect" type="TextureRect" parent="InfoPanel/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="InfoPanel/HBoxContainer"]
+layout_mode = 2
+text = "  "
+
+[node name="DividerRight" type="TextureRect" parent="InfoPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_nr2fp")
+stretch_mode = 2
+
+[node name="ShowInfoTimer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="OpenCraftingAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kadpu")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="CloseCraftingAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hkcmd")
+bus = &"SFX"
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="ShowInfoTimer" to="." method="_on_show_info_timer_timeout"]

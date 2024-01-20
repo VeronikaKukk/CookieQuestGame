@@ -1,0 +1,10 @@
+extends Node
+
+signal level_completed
+signal set_checkpoint
+signal update_inventory
+signal player_upgrade
+signal open_crafting
+signal close_crafting
+signal show_goal
+signal update_player_health

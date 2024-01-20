@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyvnfuaxx7umh"]
+
+[ext_resource type="Script" path="res://Scripts/moving_spikes.gd" id="1_8f8fp"]
+[ext_resource type="Texture2D" uid="uid://dyeok12vgmyqq" path="res://Graphics/longspikes.png" id="1_r810j"]
+[ext_resource type="PackedScene" uid="uid://0pxffpvxhbt8" path="res://Scenes/hazard_area.tscn" id="2_sfdpn"]
+[ext_resource type="PackedScene" uid="uid://du3y8lkkg3dgd" path="res://Scenes/actionable.tscn" id="3_1st20"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ml8kl"]
+size = Vector2(27, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fst57"]
+radius = 53.0
+
+[node name="MovingSpikes" type="Node2D"]
+script = ExtResource("1_8f8fp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, -32)
+texture = ExtResource("1_r810j")
+
+[node name="HazardArea" parent="." instance=ExtResource("2_sfdpn")]
+position = Vector2(3, -3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HazardArea"]
+polygon = PackedVector2Array(-3, -23, 0, -30, 3, -26, 9, -35, 13, -28, 17, -32, 20, -27, 25, -34, 28, -30, 28, -25, 27, -23, 23, -23, 18, -21, 13, -22, 11, -24, 6, -25, 4, -23, 2, -19, -2, -19)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(15.5, -12)
+shape = SubResource("RectangleShape2D_ml8kl")
+
+[node name="actionable" parent="." instance=ExtResource("3_1st20")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="actionable"]
+position = Vector2(17, -22)
+shape = SubResource("CircleShape2D_fst57")

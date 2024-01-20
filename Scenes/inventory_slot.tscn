@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvfkvo47alvh3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xi158"]
+bg_color = Color(0.682353, 0.603922, 0, 0.580392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.85098, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(30, 30)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xi158")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5

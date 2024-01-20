@@ -1,0 +1,172 @@
+[gd_scene load_steps=14 format=3 uid="uid://cw562wact4p5x"]
+
+[ext_resource type="Script" path="res://Scripts/game_world.gd" id="1_gvsws"]
+[ext_resource type="PackedScene" uid="uid://di6s13y1dj207" path="res://Scenes/player.tscn" id="1_nx7sf"]
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="3_7hg20"]
+[ext_resource type="PackedScene" uid="uid://bj07ifjxl1yr1" path="res://Scenes/transition.tscn" id="4_ankqq"]
+[ext_resource type="PackedScene" uid="uid://eld5waaybc2h" path="res://Scenes/crafting_panel.tscn" id="5_4m0gs"]
+[ext_resource type="Script" path="res://Scripts/goal_info_panel.gd" id="6_p8ays"]
+[ext_resource type="Texture2D" uid="uid://ciilh1185t1dm" path="res://Graphics/objects/key.png" id="7_1fxbh"]
+[ext_resource type="PackedScene" uid="uid://bk1xedskdtsgn" path="res://Scenes/hearts_container.tscn" id="8_3yga8"]
+[ext_resource type="Texture2D" uid="uid://ctwa0xrsiwpus" path="res://Graphics/background/divider-005.png" id="8_6bp7e"]
+[ext_resource type="Script" path="res://Scripts/Abilities.gd" id="9_5soq7"]
+[ext_resource type="FontFile" uid="uid://dykw5hix47w8h" path="res://PeaberryBase.ttf" id="9_nlcav"]
+[ext_resource type="AudioStream" uid="uid://rui1uwb7mycc" path="res://Sounds/Activate Plinth 03.wav" id="12_ojcaa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiwl7"]
+bg_color = Color(0.462745, 0.152941, 0.152941, 0.592157)
+
+[node name="GameWorld" type="Node"]
+script = ExtResource("1_gvsws")
+start_scene = "res://Scenes/level1.tscn"
+
+[node name="Player" parent="." instance=ExtResource("1_nx7sf")]
+
+[node name="Levels" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_7hg20")
+
+[node name="Abilities" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 51.0
+offset_right = 190.0
+offset_bottom = 83.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("9_5soq7")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Abilities/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="InventoryDisplay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -309.0
+offset_top = -44.0
+offset_right = 307.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryDisplay"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="Transition" parent="CanvasLayer" instance=ExtResource("4_ankqq")]
+
+[node name="CraftingPanel" parent="CanvasLayer" instance=ExtResource("5_4m0gs")]
+visible = false
+
+[node name="GoalInfo" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_p8ays")
+
+[node name="GoalPanel" type="Panel" parent="CanvasLayer/GoalInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.535
+offset_top = -26.0
+offset_right = 1.0
+offset_bottom = 13.4
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iiwl7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GoalInfo/GoalPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -13.0
+offset_right = 61.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="DividerLeft" type="TextureRect" parent="CanvasLayer/GoalInfo/GoalPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_6bp7e")
+stretch_mode = 2
+flip_h = true
+
+[node name="GoalImage" type="TextureRect" parent="CanvasLayer/GoalInfo/GoalPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_1fxbh")
+
+[node name="Label" type="Label" parent="CanvasLayer/GoalInfo/GoalPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_nlcav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DividerRight" type="TextureRect" parent="CanvasLayer/GoalInfo/GoalPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_6bp7e")
+stretch_mode = 2
+
+[node name="ShowGoalTimer" type="Timer" parent="CanvasLayer/GoalInfo"]
+wait_time = 3.0
+one_shot = true
+
+[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("8_3yga8")]
+offset_left = 16.0
+offset_top = 22.0
+offset_right = 16.0
+offset_bottom = 22.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ShowGoalAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ojcaa")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="CanvasLayer/GoalInfo/ShowGoalTimer" to="CanvasLayer/GoalInfo" method="_on_show_goal_timer_timeout"]

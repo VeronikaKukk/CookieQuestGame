@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://cy6vqvse4avti"]
+
+[ext_resource type="Texture2D" uid="uid://cm8x1biu8bc2x" path="res://Graphics/objects/treasure_chest.png" id="1_b6pfa"]
+[ext_resource type="Script" path="res://Scripts/chest.gd" id="1_ygb8v"]
+[ext_resource type="PackedScene" uid="uid://du3y8lkkg3dgd" path="res://Scenes/actionable.tscn" id="2_2n7rj"]
+[ext_resource type="AudioStream" uid="uid://bqmtc53rm34aj" path="res://Sounds/202092__spookymodem__chest-opening.wav" id="4_w7plw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_majga"]
+atlas = ExtResource("1_b6pfa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g54q"]
+atlas = ExtResource("1_b6pfa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_060la"]
+atlas = ExtResource("1_b6pfa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ck7"]
+atlas = ExtResource("1_b6pfa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idif3"]
+atlas = ExtResource("1_b6pfa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_67vk6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_majga")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g54q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_060la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7ck7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idif3")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1aqo"]
+radius = 32.0624
+
+[node name="Chest" type="Node2D" groups=["Enemy"]]
+z_index = -1
+script = ExtResource("1_ygb8v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_67vk6")
+animation = &"opening"
+
+[node name="actionable" parent="." instance=ExtResource("2_2n7rj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="actionable"]
+shape = SubResource("CircleShape2D_e1aqo")
+
+[node name="OpenChestAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_w7plw")

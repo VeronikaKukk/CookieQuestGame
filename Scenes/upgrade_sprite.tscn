@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0u0tfb7otfcc"]
+
+[ext_resource type="Script" path="res://Scripts/upgrade_sprite.gd" id="1_b36e4"]
+[ext_resource type="FontFile" uid="uid://dykw5hix47w8h" path="res://PeaberryBase.ttf" id="2_w2brd"]
+
+[node name="UpgradeSprite" type="Sprite2D"]
+centered = false
+script = ExtResource("1_b36e4")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("2_w2brd")
+theme_override_font_sizes/font_size = 10

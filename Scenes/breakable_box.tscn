@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://cra35kt8q4mjp"]
+
+[ext_resource type="Texture2D" uid="uid://b11vavne26454" path="res://Graphics/objects/Hit.png" id="1_p3opp"]
+[ext_resource type="Script" path="res://Scripts/breakable_box.gd" id="1_xa3v2"]
+[ext_resource type="Texture2D" uid="uid://tt2a72cfspp" path="res://Graphics/objects/Box Pieces 1.png" id="2_i5t5h"]
+[ext_resource type="Texture2D" uid="uid://7ltixuurjnhc" path="res://Graphics/objects/Idle.png" id="2_j8n6j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eiqww"]
+atlas = ExtResource("2_i5t5h")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4pl0"]
+atlas = ExtResource("1_p3opp")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcf2w"]
+atlas = ExtResource("2_j8n6j")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ghey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eiqww")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.6,
+"texture": SubResource("AtlasTexture_b4pl0")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcf2w")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v328"]
+size = Vector2(19, 14)
+
+[node name="BreakableBox" type="StaticBody2D" groups=["Enemy"]]
+script = ExtResource("1_xa3v2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4ghey")
+animation = &"idle"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10.5, 8)
+shape = SubResource("RectangleShape2D_7v328")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
